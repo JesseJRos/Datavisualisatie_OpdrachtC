@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width = device-width, initial-scale = 1.0">
+        <meta http-equiv="X-UA-Compatible" content = "ie=edge">
+        <title> Datavisualisatie van Jesse Ros </title>
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+    
+    <body>
+<h1 class="chordcharttitel" style="color:whitesmoke font-size=100px">Woonplaats en studieschuld van CMD studenten</h1>
+
+<h2>Landelijk gemiddeldes zijn uitgelicht in <class class="orange">oranje</class>.</h2>
+
+<div id="chordchartdiv"></div>
+
+<!-- Resources -->
+<script src="https://www.amcharts.com/lib/4/core.js"></script>
+<script src="https://www.amcharts.com/lib/4/charts.js"></script>
+<script src="https://www.amcharts.com/lib/4/themes/dark.js"></script>
+<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+
+<!-- Chord code -->
+<script>
+am4core.ready(function() {
+
+// Themes begin
+am4core.useTheme(am4themes_dark);
+am4core.useTheme(am4themes_animated);
+// Themes end
+
+var chart = am4core.create("chordchartdiv", am4charts.ChordDiagram);
+
+// colors of main characters
+chart.colors.saturation = 0.50;
+chart.colors.step = 2;
+var colors = {
+    Aalsmeer:chart.colors.next(),
+    Alkmaar:chart.colors.next(),
+    Amersfoort:chart.colors.next(),
+    Amsterdam:chart.colors.next(),
+    Amstelveen:chart.colors.next(),
+    Badhoevedorp:chart.colors.next(),
+    Castricum:chart.colors.next(),
+    DenHaag:chart.colors.next(),
+    Diemen:chart.colors.next(),
+    Haarlem:chart.colors.next(),
+    Heemstede:chart.colors.next(),
+    Heerhugowaard:chart.colors.next(),
+    Heiloo:chart.colors.next(),
+    Hoofddorp:chart.colors.next(),
+    Hoogland:chart.colors.next(),
+    Krommenie:chart.colors.next(),
+    Linschoten:chart.colors.next(),
+    Leiderdorp:chart.colors.next(),
+    Lelystad:chart.colors.next(),
+    Maarssen:chart.colors.next(),
+    Naarden:chart.colors.next(),
+    Oegstgeest:chart.colors.next(),
+    Purmerend:chart.colors.next(),
+    Swifterbant:chart.colors.next(),
+    Uithoorn:chart.colors.next(),
+    Vijfhuizen:chart.colors.next(),
+    Wateringen:chart.colors.next(),
+    Weesp:chart.colors.next(),
+    Woerden:chart.colors.next(),
+    Wormer:chart.colors.next(),
+    Zaandam:chart.colors.next(),
+    "0 tot 1000":chart.colors.next(),
+    "1000 tot 5000":chart.colors.next(),
+    "5000 tot 10.000":chart.colors.next(),
+    "10.000 tot 15.000":chart.colors.next(),
+    "15.000 tot 20.000":chart.colors.next(),
+    "20.000 tot 25.000":chart.colors.next(),
+    "25.000 of meer":chart.colors.next()
+}
+
+chart.data = [
+// node property fields take data from data items where they are first mentioned, that's 
+// why we add empty data items at the beginning and set colors here
+
+//woonplaatsen
+{"from":"Aalsmeer", "image":"", "color":colors.Aalsmeer},
+{"from":"Alkmaar", "image":"", "color":colors.Alkmaar},
+{"from":"Amersfoort", "image":"", "color":colors.Amersfoort},
+{"from":"Amsterdam", "image":"", "color":colors.Amsterdam},
+{"from":"Amstelveen", "image":"", "color":colors.Amstelveen},
+{"from":"Badhoevedorp", "image":"", "color":colors.Badhoevedorp},
+{"from":"Castricum", "image":"", "color":colors.Castricum},
+{"from":"Den Haag", "image":"", "color":colors.DenHaag},
+{"from":"Diemen", "image":"", "color":colors.Diemen},
+{"from":"Haarlem", "image":"", "color":colors.Haarlem},
+{"from":"Heemstede", "image":"", "color":colors.Heemstede},
+{"from":"Heerhugowaard", "image":"", "color":colors.Heerhugowaard},
+{"from":"Heiloo", "image":"", "color":colors.Heiloo},
+{"from":"Hoofddorp", "image":"", "color":colors.Hoofddorp},
+{"from":"Hoogland", "image":"", "color":colors.Hoogland},
+{"from":"Krommenie", "image":"", "color":colors.Krommenie},
+{"from":"Linschoten", "image":"", "color":colors.Linschoten},
+{"from":"Leiderdorp", "image":"", "color":colors.Leiderdorp},
+{"from":"Lelystad", "image":"", "color":colors.Lelystad},
+{"from":"Maarssen", "image":"", "color":colors.Maarssen},
+{"from":"Naarden", "image":"", "color":colors.Naarden},
+{"from":"Oegstgeest", "image":"", "color":colors.Oegstgeest},
+{"from":"Purmerend", "image":"", "color":colors.Purmerend},
+{"from":"Swifterbant", "image":"", "color":colors.Swifterbant},{"from":"Uithoorn", "image":"", "color":colors.Uithoorn},
+{"from":"Vijfhuizen", "image":"", "color":colors.Vijfhuizen},
+{"from":"Wateringen", "image":"", "color":colors.Wateringen},
+{"from":"Weesp", "image":"", "color":colors.Weesp},
+{"from":"Woerden", "image":"", "color":colors.Woerden},
+{"from":"Wormer", "image":"", "color":colors.Wormer},
+{"from":"Zaandam", "image":"", "color":colors.Zaandam},
+
+// studieschuld    
+{"from":"0 tot 1000", "image":"", "color":colors.nuld},
+{"from":"1000 tot 5000", "image":"", "color":colors.dvijfd},
+{"from":"5000 tot 10.000", "image":"", "color":colors.vijfdtiend},
+{"from":"10.000 tot 15.000", "image":"", "color":colors.tiendvijftiend},
+{"from":"15.000 tot 20.000", "image":"", "color":colors.vijftiendtwintigd},
+{"from":"20.000 tot 25.000", "image":"", "color":colors.twintigdvijftwintigd},
+{"from":"25.000 of meer", "image":"", "color":colors.vijfentwintigdmeer},
+
+// berekende data
+{"from":"Aalsmeer","to":"5000 tot 10.000","value":1},
+{"from":"Alkmaar","to":"1000 tot 5000","value":1},
+{"from":"Amersfoort","to":"0 tot 1000","value":1},
+{"from":"Amsterdam","to":"0 tot 1000","value":5},
+{"from":"Amsterdam","to":"1000 tot 5000","value":2},
+{"from":"Amsterdam","to":"10.000 tot 15.000","value":2},
+{"from":"Amsterdam","to":"15.000 tot 20.000","value":3},
+{"from":"Amsterdam","to":"20.000 tot 25.000","value":4},
+{"from":"Amsterdam","to":"25.000 of meer","value":4},
+{"from":"Amstelveen","to":"5000 tot 10.000","value":1},
+{"from":"Amstelveen","to":"10.000 tot 15.000","value":1},
+{"from":"Amstelveen","to":"15.000 tot 20.000","value":1},
+{"from":"Badhoevedorp","to":"0 tot 1000","value":1},
+{"from":"Castricum","to":"0 tot 1000","value":1},
+{"from":"Den Haag","to":"15.000 tot 20.000","value":1},
+{"from":"Diemen","to":"0 tot 1000","value":1},
+{"from":"Haarlem","to":"0 tot 1000","value":2},
+{"from":"Heemstede","to":"0 tot 1000","value":1},
+{"from":"Heerhugowaard","to":"5000 tot 10.000","value":1},
+{"from":"Heiloo","to":"5000 tot 10.000","value":1},
+{"from":"Hoofddorp","to":"1000 tot 5000","value":1},
+{"from":"Hoofddorp","to":"5000 tot 10.000","value":1},
+{"from":"Hoofddorp","to":"10.000 tot 15.000","value":2},
+{"from":"Hoogland","to":"5000 tot 10.000","value":1},
+{"from":"Krommenie","to":"10.000 tot 15.000","value":1},
+{"from":"Linschoten","to":"5000 tot 10.000","value":1},
+{"from":"Leiderdorp","to":"5000 tot 10.000","value":1},
+{"from":"Lelystad","to":"0 tot 1000","value":1},
+{"from":"Maarssen","to":"1000 tot 5000","value":1},
+{"from":"Naarden","to":"5000 tot 10.000","value":1},
+{"from":"Oegstgeest","to":"25.000 of meer","value":1},
+{"from":"Purmerend","to":"0 tot 1000","value":2},
+{"from":"Purmerend","to":"1000 tot 5000","value":2},
+{"from":"Swifterbant","to":"1000 tot 5000","value":1},
+{"from":"Uithoorn","to":"0 tot 1000","value":1},
+{"from":"Uithoorn","to":"10.000 tot 15.000","value":1},
+{"from":"Vijfhuizen","to":"0 tot 1000","value":1},
+{"from":"Wateringen","to":"0 tot 1000","value":1},
+{"from":"Wateringen","to":"1000 tot 5000","value":1},
+{"from":"Weesp","to":"0 tot 1000","value":3},
+{"from":"Woerden","to":"5000 tot 10.000","value":1},
+{"from":"Wormer","to":"0 tot 1000","value":2},
+{"from":"Zaandam","to":"0 tot 1000","value":1},
+{"from":"Zaandam","to":"1000 tot 5000","value":1},]
+
+
+
+chart.dataFields.fromName = "from";
+chart.dataFields.toName = "to";
+chart.dataFields.value = "value";
+
+
+chart.nodePadding = 0.5;
+chart.minNodeSize = 0.01;
+chart.startAngle = 80;
+chart.endAngle = chart.startAngle + 360;
+chart.sortBy = "value";
+chart.fontSize = 14;
+
+var nodeTemplate = chart.nodes.template;
+nodeTemplate.readerTitle = "Klik om te tonen/verbergen of sleep om te verplaatsen";
+nodeTemplate.showSystemTooltip = true;
+nodeTemplate.propertyFields.fill = "color";
+nodeTemplate.tooltipText = "{name} - {total} student(en)";
+
+// when rolled over the node, make all the links rolled-over
+nodeTemplate.events.on("over", function(event) {    
+    var node = event.target;
+    node.outgoingDataItems.each(function(dataItem) {
+        if(dataItem.toNode){
+            dataItem.link.isHover = true;
+            dataItem.toNode.label.isHover = true;
+        }
+    })
+    node.incomingDataItems.each(function(dataItem) {
+        if(dataItem.fromNode){
+            dataItem.link.isHover = true;
+            dataItem.fromNode.label.isHover = true;
+        }
+    }) 
+
+    node.label.isHover = true;   
+})
+
+// when rolled out from the node, make all the links rolled-out
+nodeTemplate.events.on("out", function(event) {
+    var node = event.target;
+    node.outgoingDataItems.each(function(dataItem) {        
+        if(dataItem.toNode){
+            dataItem.link.isHover = false;                
+            dataItem.toNode.label.isHover = false;
+        }
+    })
+    node.incomingDataItems.each(function(dataItem) {
+        if(dataItem.fromNode){
+            dataItem.link.isHover = false;
+           dataItem.fromNode.label.isHover = false;
+        }
+    })
+
+    node.label.isHover = false;
+})
+
+var label = nodeTemplate.label;
+label.relativeRotation = 90;
+
+label.fillOpacity = 0.4;
+let labelHS = label.states.create("hover");
+labelHS.properties.fillOpacity = 1;
+
+nodeTemplate.cursorOverStyle = am4core.MouseCursorStyle.pointer;
+// this makes nodes fill with the color of their most correlated value/category
+nodeTemplate.adapter.add("fill", function(fill, target) {
+    let node = target;
+    let counters = {};
+    let mainChar = false;
+    node.incomingDataItems.each(function(dataItem) {
+        if(colors[dataItem.toName]){
+            mainChar = true;
+        }
+
+        if(isNaN(counters[dataItem.fromName])){
+            counters[dataItem.fromName] = dataItem.value;
+        }
+        else{
+            counters[dataItem.fromName] += dataItem.value;
+        }
+    })
+    if(mainChar){
+        return fill;
+    }
+
+    let count = 0;
+    let color;
+    let biggest = 0;
+    let biggestName;
+
+    for(var name in counters){
+        if(counters[name] > biggest){
+            biggestName = name;
+            biggest = counters[name]; 
+        }        
+    }
+    if(colors[biggestName]){
+        fill = colors[biggestName];
+    }
+  
+    return fill;
+})
+
+// link template
+var linkTemplate = chart.links.template;
+linkTemplate.strokeOpacity = 0;
+linkTemplate.fillOpacity = 0.15;
+linkTemplate.tooltipText = "{fromName} heeft {value.value} x {toName} euro aan schuld";
+
+var hoverState = linkTemplate.states.create("hover");
+hoverState.properties.fillOpacity = 0.7;
+hoverState.properties.strokeOpacity = 0.7;
+
+// data credit label
+var creditLabel = chart.chartContainer.createChild(am4core.TextLink);
+creditLabel.text = "Bronnen: CMD enquete en Studentenmonitor.nl";
+creditLabel.url = "http://www.studentenmonitor.nl/tabellen/index.html";
+creditLabel.y = am4core.percent(99);
+creditLabel.x = am4core.percent(99);
+creditLabel.horizontalCenter = "right";
+creditLabel.verticalCenter = "bottom";
+
+var titleImage = chart.chartContainer.createChild(am4core.Image);
+//titleImage.href = ;
+titleImage.x = 30
+titleImage.y = 30;
+titleImage.width = 200;
+titleImage.height = 200;
+
+}); // end am4core.ready()
+</script>
+<!--       Pie chart code       -->
+<script>
+am4core.ready(function() {
+
+// Themes begin
+am4core.useTheme(am4themes_dark);
+am4core.useTheme(am4themes_animated);
+// Themes end
+
+var data = [{
+    "opleiding": "Dummy",
+    "disabled": true,
+    "studenten": 65,
+    "color": am4core.color("#dadada"),
+    "opacity": 0.3,
+    "strokeDasharray": "4,4"
+}, {
+    "opleiding": "HAVO WEL",
+    "studenten": 14
+}, {
+    "opleiding": "HAVO NIET",
+    "studenten": 12
+}, {
+    "opleiding": "VWO WEL",
+    "studenten": 4
+}, {
+    "opleiding": "VWO NIET",
+    "studenten": 1
+}, {
+    "opleiding": "MBO WEL",
+    "studenten": 23
+}, {
+    "opleiding": "MBO NIET",
+    "studenten": 11
+}];
+
+
+// container to hold both charts
+var container = am4core.create("piechartdiv", am4core.Container);
+container.width = am4core.percent(100);
+container.height = am4core.percent(100);
+container.layout = "horizontal";
+
+container.events.on("maxsizechanged", function () {
+    chart1.zIndex = 0;
+    separatorLine.zIndex = 1;
+    dragText.zIndex = 2;
+    chart2.zIndex = 3;
+    chart3.zIndex = 4;
+})
+
+// CHART 1
+var chart1 = container.createChild(am4charts.PieChart);
+chart1 .fontSize = 16;
+chart1.hiddenState.properties.opacity = 0; // this makes initial fade in effect
+chart1.data = data;
+chart1.radius = am4core.percent(70);
+chart1.innerRadius = am4core.percent(40);
+chart1.zIndex = 1;
+
+var series1 = chart1.series.push(new am4charts.PieSeries());
+series1.dataFields.value = "studenten";
+series1.dataFields.category = "opleiding";
+series1.colors.step = 2;
+series1.alignLabels = false;
+series1.labels.template.bent = true;
+series1.labels.template.radius = am4core.percent(-40);
+series1.labels.template.padding(0,0,0,0);
+series1.labels.template.text = "{value.percent.formatNumber('#.0')}%";
+series1.labels.template.radius = am4core.percent(-12);
+
+var sliceTemplate1 = series1.slices.template;
+sliceTemplate1.cornerRadius = 4;
+sliceTemplate1.draggable = true;
+sliceTemplate1.inert = true;
+sliceTemplate1.propertyFields.fill = "color";
+sliceTemplate1.propertyFields.fillOpacity = "opacity";
+sliceTemplate1.propertyFields.stroke = "color";
+sliceTemplate1.propertyFields.strokeDasharray = "strokeDasharray";
+sliceTemplate1.strokeWidth = 1;
+sliceTemplate1.strokeOpacity = 1;
+
+var zIndex = 5;
+
+sliceTemplate1.events.on("down", function (event) {
+    event.target.toFront();
+    // also put chart to front
+    var series = event.target.dataItem.component;
+    series.chart.zIndex = zIndex++;
+})
+
+series1.ticks.template.disabled = true;
+
+sliceTemplate1.states.getKey("active").properties.shiftRadius = 0;
+
+sliceTemplate1.events.on("dragstop", function (event) {
+    handleDragStop(event);
+})
+
+// separator line and text
+var separatorLine = container.createChild(am4core.Line);
+separatorLine.x1 = 0;
+separatorLine.y2 = 300;
+separatorLine.strokeWidth = 3;
+separatorLine.stroke = am4core.color("#dadada");
+separatorLine.valign = "middle";
+separatorLine.strokeDasharray = "5,5";
+
+var dragText = container.createChild(am4core.Label);
+dragText.text = "Sleep stukken over de lijn";
+dragText.rotation = 90;
+dragText.valign = "middle";
+dragText.align = "center";
+dragText.paddingBottom = 5;
+
+// CHART 2
+var chart2 = container.createChild(am4charts.PieChart);
+chart2.hiddenState.properties.opacity = 0; // this makes initial fade in effect
+chart2.fontSize = 11;
+chart2.data = data;
+chart2.radius = am4core.percent(70);
+chart2.innerRadius = am4core.percent(40);
+chart2.zIndex = 1;
+
+var series2 = chart2.series.push(new am4charts.PieSeries());
+series2.dataFields.value = "studenten";
+series2.dataFields.category = "opleiding";
+series2.colors.step = 2;
+
+series2.alignLabels = false;
+series2.labels.template.bent = true;
+series2.labels.template.radius = 3;
+series2.labels.template.padding(0,0,0,0);
+series2.labels.template.propertyFields.disabled = "disabled";
+
+var sliceTemplate2 = series2.slices.template;
+sliceTemplate2.copyFrom(sliceTemplate1);
+
+series2.ticks.template.disabled = true;
+
+
+// CHART 3
+var chart3 = container.createChild(am4charts.PieChart);
+chart3.fontSize = 16;
+chart3.hiddenState.properties.opacity = 0; // this makes initial fade in effect
+chart3.data = data;
+chart3.radius = am4core.percent(70);
+chart3.innerRadius = am4core.percent(40);
+chart3.zIndex = 1;
+
+var series3 = chart3.series.push(new am4charts.PieSeries());
+series3.dataFields.value = "studenten";
+series3.dataFields.category = "opleiding";
+series3.colors.step = 2;
+series3.alignLabels = false;
+series3.labels.template.bent = true;
+series3.labels.template.radius = am4core.percent(-40);
+series3.labels.template.padding(0,0,0,0);
+series3.labels.template.text = "{value.percent.formatNumber('#.0')}%";
+series3.labels.template.radius = am4core.percent(-12);
+
+var sliceTemplate3 = series3.slices.template;
+sliceTemplate3.cornerRadius = 4;
+sliceTemplate3.draggable = true;
+sliceTemplate3.inert = true;
+sliceTemplate3.propertyFields.fill = "color";
+sliceTemplate3.propertyFields.fillOpacity = "opacity";
+sliceTemplate3.propertyFields.stroke = "color";
+sliceTemplate3.propertyFields.strokeDasharray = "strokeDasharray";
+sliceTemplate3.strokeWidth = 1;
+sliceTemplate3.strokeOpacity = 1;
+
+var zIndex = 5;
+
+sliceTemplate3.events.on("down", function (event) {
+    event.target.toFront();
+    // also put chart to front
+    var series = event.target.dataItem.component;
+    series.chart.zIndex = zIndex++;
+})
+
+series3.ticks.template.disabled = true;
+
+sliceTemplate3.states.getKey("active").properties.shiftRadius = 0;
+
+sliceTemplate3.events.on("dragstop", function (event) {
+    handleDragStop(event);
+})
+
+
+
+
+
+
+
+function handleDragStop(event) {
+    var targetSlice = event.target;
+    var dataItem1;
+    var dataItem2;
+    var slice1;
+    var slice2;
+
+    if (series1.slices.indexOf(targetSlice) != -1) {
+        slice1 = targetSlice;
+        slice2 = series2.dataItems.getIndex(targetSlice.dataItem.index).slice;
+    }
+    else if (series2.slices.indexOf(targetSlice) != -1) {
+        slice1 = series1.dataItems.getIndex(targetSlice.dataItem.index).slice;
+        slice2 = targetSlice;
+    }
+
+
+    dataItem1 = slice1.dataItem;
+    dataItem2 = slice2.dataItem;
+
+    var series1Center = am4core.utils.spritePointToSvg({ x: 0, y: 0 }, series1.slicesContainer);
+    var series2Center = am4core.utils.spritePointToSvg({ x: 0, y: 0 }, series2.slicesContainer);
+
+    var series1CenterConverted = am4core.utils.svgPointToSprite(series1Center, series2.slicesContainer);
+    var series2CenterConverted = am4core.utils.svgPointToSprite(series2Center, series1.slicesContainer);
+
+    // tooltipY and tooltipY are in the middle of the slice, so we use them to avoid extra calculations
+    var targetSlicePoint = am4core.utils.spritePointToSvg({ x: targetSlice.tooltipX, y: targetSlice.tooltipY }, targetSlice);
+
+    if (targetSlice == slice1) {
+        if (targetSlicePoint.x > container.pixelWidth / 2) {
+            var value = dataItem1.value;
+
+            dataItem1.hide();
+
+            var animation = slice1.animate([{ property: "x", to: series2CenterConverted.x }, { property: "y", to: series2CenterConverted.y }], 400);
+            animation.events.on("animationprogress", function (event) {
+                slice1.hideTooltip();
+            })
+
+            slice2.x = 0;
+            slice2.y = 0;
+
+            dataItem2.show();
+        }
+        else {
+            slice1.animate([{ property: "x", to: 0 }, { property: "y", to: 0 }], 400);
+        }
+    }
+    if (targetSlice == slice2) {
+        if (targetSlicePoint.x < container.pixelWidth / 2) {
+
+            var value = dataItem2.value;
+
+            dataItem2.hide();
+
+            var animation = slice2.animate([{ property: "x", to: series1CenterConverted.x }, { property: "y", to: series1CenterConverted.y }], 400);
+            animation.events.on("animationprogress", function (event) {
+                slice2.hideTooltip();
+            })
+
+            slice1.x = 0;
+            slice1.y = 0;
+            dataItem1.show();
+        }
+        else {
+            slice2.animate([{ property: "x", to: 0 }, { property: "y", to: 0 }], 400);
+        }
+    }
+
+    toggleDummySlice(series1);
+    toggleDummySlice(series2);
+
+    series1.hideTooltip();
+    series2.hideTooltip();
+}
+
+function toggleDummySlice(series) {
+    var show = true;
+    for (var i = 1; i < series.dataItems.length; i++) {
+        var dataItem = series.dataItems.getIndex(i);
+        if (dataItem.slice.visible && !dataItem.slice.isHiding) {
+            show = false;
+        }
+    }
+
+    var dummySlice = series.dataItems.getIndex(0);
+    if (show) {
+        dummySlice.show();
+    }
+    else {
+        dummySlice.hide();
+    }
+}
+
+series2.events.on("datavalidated", function () {
+
+    var dummyDataItem = series2.dataItems.getIndex(0);
+    dummyDataItem.show(0);
+    dummyDataItem.slice.draggable = false;
+    dummyDataItem.slice.tooltipText = undefined;
+
+    for (var i = 1; i < series2.dataItems.length; i++) {
+        series2.dataItems.getIndex(i).hide(0);
+    }
+})
+
+series1.events.on("datavalidated", function () {
+    var dummyDataItem = series1.dataItems.getIndex(0);
+    dummyDataItem.hide(0);
+    dummyDataItem.slice.draggable = false;
+    dummyDataItem.slice.tooltipText = undefined;
+})
+
+}); // end am4core.ready()
+</script>
+
+<img class="legenda" src="images/studentenschuld_legenda.png">
+<h1 class="piecharttitel">Wel of geen studieschuld per vooropleiding.</h1>
+<div id="piechartdiv"></div>
+    </body>
+</html>
