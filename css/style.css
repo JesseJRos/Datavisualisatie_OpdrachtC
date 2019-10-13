@@ -18,6 +18,13 @@ border-bottom: solid;
 border-bottom-width: thin;
 }
 
+.piechartsub {
+font-size: 15px;
+font-weight: lighter;
+margin-top: 110px;
+margin-bottom: -100px;
+}
+
 body { 
 background-color: #30303d; color: #fff;
 font-family: sans-serif;
@@ -38,15 +45,21 @@ border-style: solid;
 border-width: thin;
 }
 
-class.orange {
-color: orange;
+class.green {
+color: limegreen;
+font-weight: 600;
 }
 
 .legenda {
 width: 55%;
 position: absolute;
-padding-left: 500px;
+padding-left: 450px;
 padding-top: 45%;
 margin-bottom: 20px;
 }
 
+.link {
+color: dimgrey;
+position: sticky;
+float: right;
+}
