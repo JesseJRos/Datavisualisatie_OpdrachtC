@@ -1,0 +1,52 @@
+h1 {
+font-size: 25px;
+font-weight: lighter;
+border-bottom: solid;
+border-bottom-width: thin;
+}
+
+h2 {
+font-size: 15px;
+font-weight: lighter;
+}
+
+.piecharttitel {
+margin-bottom: -100px;
+font-size: 25px;
+font-weight: lighter;
+border-bottom: solid;
+border-bottom-width: thin;
+}
+
+body { 
+background-color: #30303d; color: #fff;
+font-family: sans-serif;
+}
+
+#piechartdiv {
+width: 100%;
+height: 800px;
+}
+
+#chordchartdiv {
+width: 100%;
+height: 800px;
+}
+
+ul {
+border-style: solid;
+border-width: thin;
+}
+
+class.orange {
+color: orange;
+}
+
+.legenda {
+width: 55%;
+position: absolute;
+padding-left: 500px;
+padding-top: 45%;
+margin-bottom: 20px;
+}
+
